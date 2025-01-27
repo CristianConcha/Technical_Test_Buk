@@ -4,7 +4,48 @@
       <%= flash[:alert] %>
    </div>
    <% else %>
-   <h2>Resultado</h2>
-   <p>Vacaciones calculadas: <%= @vacations_days %> días</p>
+   <div class="modal-content">
+      <h2 class="modal-title">Tienes</h2>
+      <p class="modal-body"><%= @vacations_days %> días de <%= @vacation_type%></p>
+   </div>
    <% end %>
 </div>
+
+<style>
+   .alert.alert-danger {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      border: 1px solid #f5c6cb;
+      margin-bottom: 20px;
+      width: 90%;
+   }
+
+   .modal-content {
+      max-width: 450px;
+      min-width: 320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+   }
+
+   .modal-title {
+      color: #2f4daa;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+   }
+
+   .modal-body {
+      color: #2f4daa;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+   }
+</style>

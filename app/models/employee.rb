@@ -8,4 +8,12 @@ class Employee
     @last_three_years_same_company = last_three_years_same_company
   end
 
-  
+  # Methods
+  def normal_vacations(query_date)
+
+    total_months = (query_date.year * 12 + query_date.month) - (@start_date.year * 12 + @start_date.month)
+
+    total_vacations = (total_months >= 12 && @total_worked_years >= 1) ? 15 : 0
+  end
+
+end

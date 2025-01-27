@@ -48,4 +48,34 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_equal 18, employee.progressive_vacations(query_date)
   end
 
+  # Test for the method proportional vacations
+  test "employee with 8 months and 24 days of work should have 11 days of vacation" do
+    employee = Employee.new(
+      start_date: Date.new(2023, 1, 1),
+      total_worked_years: 0,
+      last_three_years_same_company: false
+    )
+    query_date = Date.new(2023, 9, 25)
+    assert_equal 11, employee.proportional_vacations(query_date)
+  end
+
+  test "employee with 3 months and 0 days of work should have 3.75 days of vacation" do
+    employee = Employee.new(
+      start_date: Date.new(2023, 1, 1),
+      total_worked_years: 0,
+      last_three_years_same_company: false
+    )
+    query_date = Date.new(2023, 4, 1)
+    assert_equal 3.75, employee.proportional_vacations(query_date)
+  end
+
+  test "employee with 1 month and 0 days of work should have 1.25 days of vacation" do
+    employee = Employee.new(
+      start_date: Date.new(2023, 1, 1),
+      total_worked_years: 0,
+      last_three_years_same_company: false
+    )
+    query_date = Date.new(2023, 2, 1)
+    assert_equal 1.25, employee.proportional_vacations(query_date)
+  end
 end

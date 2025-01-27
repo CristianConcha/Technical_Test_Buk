@@ -10,9 +10,9 @@ class Employee
 
   # Methods
   def normal_vacations(query_date)
-    total_months = total_months_same_company(query_date)
+    total_months_same_company = total_months_same_company(query_date)
 
-    total_vacations = (total_months >= 12 && @total_worked_years >= 1) ? 15 : 0
+    total_vacations = (total_months_same_company >= 12 && @total_worked_years >= 1) ? 15 : 0
   end
 
   def progressive_vacations(query_date)
@@ -28,6 +28,20 @@ class Employee
     end
 
     total_vacations
+  end
+
+  def proportional_vacations(query_date)
+    return 0 if query_date <= @start_date || @total_worked_years >= 1
+
+    # Months worked
+    total_months_same_company = total_months_same_company(query_date)
+    months_vacations = total_months_same_company * 1.25
+
+    # Days worked in the current month
+    total_days_same_company = (query_date.day - @start_date.day).to_i.abs
+    days_vacations = ((total_days_same_company/30.0) * 1.25).round(2)
+
+    total_vacations = months_vacations + days_vacations
   end
 
   private

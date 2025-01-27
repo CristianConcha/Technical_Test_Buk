@@ -44,6 +44,16 @@ class Employee
     total_vacations = months_vacations + days_vacations
   end
 
+  # Validation
+  def validate!(query_date)
+    if query_date < start_date
+      raise "La fecha de consulta no puede ser anterior a la fecha de inicio"
+    elsif total_worked_years < 1 && (query_date - start_date).to_i / 365 > 1
+      raise "La fecha de consulta no puede ser más de 1 año después de la fecha de inicio cuando el total de años trabajados es menor a 1"
+    end
+    true
+  end
+
   private
 
   def total_months_same_company(query_date)

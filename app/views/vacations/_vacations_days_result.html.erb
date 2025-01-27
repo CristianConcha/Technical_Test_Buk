@@ -1,0 +1,10 @@
+<div id="vacations-days-result" class="mt-4">
+   <% if flash[:alert] %>
+   <div class="alert alert-danger">
+      <%= flash[:alert] %>
+   </div>
+   <% else %>
+   <h2>Resultado</h2>
+   <p>Vacaciones calculadas: <%= @vacations_days %> días</p>
+   <% end %>
+</div>

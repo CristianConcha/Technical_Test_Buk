@@ -1,0 +1,49 @@
+<div class="form-container">
+   <h1 class="title">Calcula tus Días de Vacaciones</h1>
+
+   <%= form_with url: "/calculate_vacations", method: "post", local: true, class: "form" do |form| %>
+
+   <div class="input-group">
+      <label for="start_date">Fecha de inicio del empleo</label>
+      <%= form.date_field :start_date, required: true, class: "input" %>
+   </div>
+
+   <div class="input-group">
+      <label for="total_worked_years">Total de años trabajados</label>
+      <%= form.number_field :total_worked_years, min: 0, required: true, class: "input" %>
+   </div>
+
+   <div class="input-group">
+      <label for="last_three_years_same_company">¿Has permanecido en la misma empresa durante los últimos 3 años?</label>
+      <%= form.select :last_three_years_same_company, [["No", 'false'], ["Sí", 'true']], required: true, class: "input", id: "last_three_years_same_company" %>
+   </div>
+
+   <div class="input-group">
+      <label for="query_date">Fecha de Consulta</label>
+      <%= form.date_field :query_date, required: true, class: "input" %>
+   </div>
+
+   <%= form.submit "Calcular", class: "submit-button" %>
+
+   <% end %>
+</div>
+
+
+<div id="vacations-days-result"></div>
+
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("form");
+      if (!form) return;
+      form.addEventListener("submit", async (event) => {
+         event.preventDefault();
+         const formData = new FormData(form);
+         const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+         });
+         const result = await response.text();
+         document.getElementById("vacations-days-result").innerHTML = result;
+      });
+   });
+</script>
